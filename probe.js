@@ -1,8 +1,8 @@
-import uuid from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 export function main (_event) {
   let payload = {
-    id: uuid.v4().toLowerCase(),
+    id: uuidv4(),
     date: new Date().toISOString()
   }
 
@@ -12,5 +12,5 @@ export function main (_event) {
     payload = { ...payload, category: 'low' }
   }
 
-  console.log(`INFO ${payload}`)
+  console.log(`${JSON.stringify(payload)}`)
 }
