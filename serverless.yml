@@ -1,0 +1,27 @@
+service: simple-probe-maker
+
+plugins:
+  - serverless-bundle
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+
+functions:
+  probe:
+    handler: probe.main
+    events:
+      - schedule:
+          name: schedule-log-generation
+          description: 'Generate logs every minute'
+          rate: rate(1 minute)
+  exportlog:
+    handler: export.main
+    events:
+      - schedule:
+          name: schedule-log-exportation
+          description: 'Export logs every 5 minutes'
+          rate: rate(5 minutes)
+resources:
+  - ${file(resources/s3-log-bucket.yml)}

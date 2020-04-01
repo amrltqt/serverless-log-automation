@@ -1,0 +1,8 @@
+Resources:
+  LogsBucket:
+    Type: AWS::S3::Bucket
+
+Outputs:
+  LogsBucket:
+    Value:
+      Ref: LogsBucket
